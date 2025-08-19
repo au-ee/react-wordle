@@ -8,10 +8,12 @@ type Props = {
 
 export const InfoModal = ({ isOpen, handleClose }: Props) => {
   return (
-    <BaseModal title="How to play" isOpen={isOpen} handleClose={handleClose}>
+    <BaseModal title="Wie gespielt wird" isOpen={isOpen} handleClose={handleClose}>
+      <img src="logo512.png" alt="Mumpfle" width="100%" />
+      
       <p className="text-sm text-gray-500 dark:text-gray-300">
-        Guess the word in 6 tries. After each guess, the color of the tiles will
-        change to show how close your guess was to the word.
+        Rate das Wort in 6 Versuchen. Nach jedem Versuch ändern sich die Farben 
+        der Kacheln und zeigen dir, wie nah du dem gesuchten Wort warst.
       </p>
 
       <div className="mb-1 mt-4 flex justify-center">
@@ -21,51 +23,44 @@ export const InfoModal = ({ isOpen, handleClose }: Props) => {
           value="W"
           status="correct"
         />
-        <Cell value="E" isCompleted={true} />
-        <Cell value="A" isCompleted={true} />
+        <Cell value="U" isCompleted={true} />
         <Cell value="R" isCompleted={true} />
-        <Cell value="Y" isCompleted={true} />
+        <Cell value="S" isCompleted={true} />
+        <Cell value="T" isCompleted={true} />
       </div>
       <p className="text-sm text-gray-500 dark:text-gray-300">
-        The letter W is in the word and in the correct spot.
+        Der Buchstabe W ist im Wort und an der richtigen Stelle.
       </p>
 
       <div className="mb-1 mt-4 flex justify-center">
         <Cell value="P" isCompleted={true} />
-        <Cell value="I" isCompleted={true} />
+        <Cell value="A" isCompleted={true} />
         <Cell
           isRevealing={true}
           isCompleted={true}
-          value="L"
+          value="U"
           status="present"
         />
-        <Cell value="O" isCompleted={true} />
-        <Cell value="T" isCompleted={true} />
+        <Cell value="L" isCompleted={true} />
+        <Cell value="I" isCompleted={true} />
       </div>
       <p className="text-sm text-gray-500 dark:text-gray-300">
-        The letter L is in the word but in the wrong spot.
+        Der Buchstabe U ist im Wort, aber an der falschen Stelle.
       </p>
 
       <div className="mb-1 mt-4 flex justify-center">
         <Cell value="V" isCompleted={true} />
-        <Cell value="A" isCompleted={true} />
+        <Cell value="O" isCompleted={true} />
         <Cell value="G" isCompleted={true} />
-        <Cell isRevealing={true} isCompleted={true} value="U" status="absent" />
-        <Cell value="E" isCompleted={true} />
+        <Cell isRevealing={true} isCompleted={true} value="E" status="absent" />
+        <Cell value="L" isCompleted={true} />
       </div>
       <p className="text-sm text-gray-500 dark:text-gray-300">
-        The letter U is not in the word in any spot.
+        Der Buchstabe E kommt im Wort gar nicht vor.
       </p>
 
       <p className="mt-6 text-sm italic text-gray-500 dark:text-gray-300">
-        This is an open source version of the word guessing game we all know and
-        love -{' '}
-        <a
-          href="https://github.com/cwackerfuss/react-wordle"
-          className="font-bold underline"
-        >
-          check out the code here
-        </a>{' '}
+        Das ist Mumpfi-Version des Wörter-Ratespiels, das wir alle kennen und lieben.
       </p>
     </BaseModal>
   )

@@ -1,6 +1,6 @@
 export const GAME_TITLE = process.env.REACT_APP_GAME_NAME!
 
-export const WIN_MESSAGES = ['Subberle!', 'Klasse!', 'Gut gemacht!']
+export const WIN_MESSAGES = ['Subberle!', 'Gratulation!', 'Mumpfimäßig!']
 export const GAME_COPIED_MESSAGE = 'Spiel in die Zwischenablage kopiert'
 export const NOT_ENOUGH_LETTERS_MESSAGE = 'Nicht genug Buchstaben'
 export const WORD_NOT_FOUND_MESSAGE = 'Wort nicht gefunden'
