@@ -36,7 +36,11 @@ export const Navbar = ({
             />
           )}
         </div>
-        <p className="text-xl font-bold dark:text-white">{GAME_TITLE}</p>
+        <img 
+          src="mumpfle-header.png" 
+          alt="Mumpfle" 
+          className="h-8"
+        />
         <div className="right-icons">
           <ChartBarIcon
             className="mr-3 h-6 w-6 cursor-pointer dark:stroke-white"
