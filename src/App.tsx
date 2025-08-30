@@ -3,7 +3,7 @@ import './App.css'
 import { ClockIcon } from '@heroicons/react/outline'
 import { format } from 'date-fns'
 import { default as GraphemeSplitter } from 'grapheme-splitter'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Div100vh from 'react-div-100vh'
 
 import { AlertContainer } from './components/alerts/AlertContainer'
@@ -35,6 +35,7 @@ import {
 } from './constants/strings'
 import { useAlert } from './context/AlertContext'
 import { isInAppBrowser } from './lib/browser'
+import { getToday } from './lib/dateutils'
 import {
   getStoredIsHighContrastMode,
   loadGameStateFromLocalStorage,
@@ -109,6 +110,9 @@ function App() {
       : false
   )
 
+  // Track the current date to detect day changes
+  const currentDateRef = useRef(getToday())
+
   useEffect(() => {
     // if no game state on load,
     // show the user the how-to info modal
@@ -127,6 +131,38 @@ function App() {
         durationMs: 7000,
       })
   }, [showErrorAlert])
+
+  // Add focus event listener to detect day changes
+  useEffect(() => {
+    const handleFocus = () => {
+      const today = getToday()
+      const storedDate = currentDateRef.current
+
+      // Check if the date has changed since the app was last active
+      if (today.getTime() !== storedDate.getTime()) {
+        // Date has changed, reload the page to get the new day's puzzle
+        window.location.reload()
+      }
+    }
+
+    const handleVisibilityChange = () => {
+      if (!document.hidden) {
+        handleFocus()
+      }
+    }
+
+    // Listen for both focus and visibility change events
+    window.addEventListener('focus', handleFocus)
+    document.addEventListener('visibilitychange', handleVisibilityChange)
+
+    // Update the stored date when the component mounts
+    currentDateRef.current = getToday()
+
+    return () => {
+      window.removeEventListener('focus', handleFocus)
+      document.removeEventListener('visibilitychange', handleVisibilityChange)
+    }
+  }, [])
 
   useEffect(() => {
     if (isDarkMode) {
@@ -290,7 +326,7 @@ function App() {
           </div>
         )}
 
-        <div className="mx-auto flex w-full grow flex-col px-1 pt-2 pb-8 sm:px-6 md:max-w-7xl lg:px-8 short:pb-2 short:pt-2">
+        <div className="mx-auto flex w-full grow flex-col px-1 pb-8 pt-2 sm:px-6 md:max-w-7xl lg:px-8 short:pb-2 short:pt-2">
           <div className="flex grow flex-col justify-center pb-6 short:pb-2">
             <Grid
               solution={solution}
